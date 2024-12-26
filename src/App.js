@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import AddFood from './AddFood';
+import FoodList from './FoodList';
+import db from './food.json';
+import EditFood from './Edit-Food';
 
 function App() {
+  console.log("DB: " + db);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <Link className='link' to="/" >Home</Link>
+        <Link className='link' to="/food" >Food</Link>
+        <Link className='link' to="/add" >Add New Food</Link>
+        <Link className='link' to="/about" >About</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/food" element={<FoodList data={db} />} />
+        <Route path="/add" element={<AddFood data={db} />} />
+        <Route path="/edit/:id" element={ <EditFood data={db} /> }></Route>
+      </Routes>
     </div>
   );
 }
